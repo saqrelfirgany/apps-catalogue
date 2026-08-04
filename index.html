@@ -66,18 +66,42 @@ html[dir=rtl] .hero h1{letter-spacing:0;line-height:1.25}
 html[dir=rtl] .track{animation-name:slideR}
 @keyframes slideR{from{transform:translateX(0)}to{transform:translateX(50%)}}
 @media(prefers-reduced-motion:reduce){.track{animation:none}}
-.mcard{flex:0 0 260px;background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);
-       padding:18px;cursor:pointer;transition:.22s;text-align:start;display:block;font:inherit;color:inherit}
-.mcard:hover{transform:translateY(-5px);border-color:#c9d4e2;box-shadow:0 16px 40px rgba(15,23,32,.10);background:#fff}
-.mtop{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.mtop img{width:46px;height:46px;border-radius:12px;flex:none;background:#e9edf3;object-fit:cover}
-.mtop .ph{width:46px;height:46px;border-radius:12px;flex:none;display:grid;place-items:center;
-          background:linear-gradient(140deg,#0b64d6,#062f6b);color:#fff;font-weight:800;font-size:17px;font-family:var(--f-lat)}
-.mtop b{font-size:15px;font-weight:700;letter-spacing:-.01em;display:block}
+.mcard{flex:0 0 340px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+       cursor:pointer;transition:transform .28s cubic-bezier(.2,.7,.3,1),box-shadow .28s,border-color .28s;
+       text-align:start;display:block;font:inherit;color:inherit;overflow:hidden;
+       box-shadow:0 2px 10px rgba(15,23,32,.04)}
+.mcard:hover{transform:translateY(-8px);border-color:#c2d2e6;box-shadow:0 22px 52px rgba(15,23,32,.15)}
+.mcard:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* الشباك اللي بيبين جزء من صورة التطبيق */
+.mshot{position:relative;height:186px;overflow:hidden;background:linear-gradient(150deg,#eef2f7,#dde5ef)}
+.mshot img{width:100%;height:auto;display:block;transform:translateY(-6%) scale(1.04);
+           transition:transform .5s cubic-bezier(.2,.7,.3,1)}
+.mcard:hover .mshot img{transform:translateY(-11%) scale(1.09)}
+.mshot::after{content:"";position:absolute;inset:auto 0 0 0;height:78px;
+              background:linear-gradient(180deg,rgba(255,255,255,0),#fff)}
+.mshot.none{display:grid;place-items:center}
+.mshot.none .big{width:74px;height:74px;border-radius:20px;display:grid;place-items:center;
+     background:linear-gradient(140deg,#0b64d6,#062f6b);color:#fff;font-weight:800;font-size:26px;
+     font-family:var(--f-lat);box-shadow:0 12px 30px rgba(11,100,214,.3)}
+
+.mbody{padding:0 18px 18px;position:relative;margin-top:-30px}
+.mtop{display:flex;align-items:center;gap:12px;margin-bottom:11px}
+.mtop img{width:52px;height:52px;border-radius:14px;flex:none;background:#fff;object-fit:cover;
+          border:2px solid #fff;box-shadow:0 6px 18px rgba(15,23,32,.14)}
+.mtop .ph{width:52px;height:52px;border-radius:14px;flex:none;display:grid;place-items:center;
+          background:linear-gradient(140deg,#0b64d6,#062f6b);color:#fff;font-weight:800;font-size:19px;
+          font-family:var(--f-lat);border:2px solid #fff;box-shadow:0 6px 18px rgba(15,23,32,.14)}
+.mtop b{font-size:16px;font-weight:700;letter-spacing:-.01em;display:block;line-height:1.25}
 .mtop small{color:var(--mut);font-size:11.5px;font-family:var(--f-lat);direction:ltr;unicode-bidi:isolate}
-.mcard p{margin:0;font-size:13px;color:var(--ink2);line-height:1.55;
+.mcard p{margin:0;font-size:13.5px;color:var(--ink2);line-height:1.55;
          display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.mgo{margin-top:14px;font-size:12px;font-weight:700;color:var(--accent)}
+.mtags{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}
+.mtags span{font-size:11px;padding:4px 10px;border-radius:999px;background:var(--bg2);color:var(--mut)}
+.mgo{margin-top:13px;font-size:12.5px;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:6px}
+.mcard:hover .mgo .arr{transform:translateY(3px)}
+.mgo .arr{transition:transform .25s}
+@media(max-width:640px){ .mcard{flex-basis:280px} .mshot{height:150px} }
 
 /* ---------- app section ---------- */
 .sec{padding:96px 0;border-top:1px solid var(--line)}
@@ -102,7 +126,8 @@ html[dir=rtl] .sec h2{letter-spacing:0}
 @media(max-width:940px){ .grid{grid-template-columns:1fr;gap:34px} }
 
 /* gallery */
-.gal{display:flex;gap:14px;overflow-x:auto;padding-bottom:14px;scroll-snap-type:x mandatory}
+.gal{display:flex;gap:14px;overflow-x:auto;padding-bottom:14px;scroll-snap-type:x proximity;
+     scrollbar-width:thin}
 .gal::-webkit-scrollbar{height:7px}
 .gal::-webkit-scrollbar-thumb{background:#d3dae4;border-radius:4px}
 .gal img{flex:0 0 auto;height:400px;width:auto;border-radius:15px;border:1px solid var(--line);
@@ -197,12 +222,14 @@ footer .btn.pri{background:#fff;border-color:#fff;color:var(--ink)}
          "cta.p":"The fastest way to judge the work is to open one. Every link above is live.",
          "cta.fine":"Screenshots come from the public store listings.",
          "cta.upd":"Updated", "nav.work":"The work", "gallery":"Screenshots",
+         "play":"Google Play", "ios":"App Store",
          "did":"What I built", "hard":"The hard part", "internal":"Internal system — it runs inside the client's company, so there is no public store page.",
          "noshot":"No store gallery for this one.", "open":"Open" },
     ar:{ "cta.h":"عايز واحد زي دول يتبني ليك؟",
          "cta.p":"أسرع طريقة تحكم على الشغل إنك تفتح واحد منهم. كل اللينكات فوق شغالة.",
          "cta.fine":"الصور من صفحات التطبيقات على المتاجر.",
          "cta.upd":"آخر تحديث", "nav.work":"الشغل", "gallery":"صور من التطبيق",
+         "play":"جوجل بلاي", "ios":"آب ستور",
          "did":"اللي عملته", "hard":"الجزء الصعب", "internal":"نظام داخلي — بيشتغل جوه شركة العميل, فمالوش صفحة على متجر عام.",
          "noshot":"مفيش معرض صور على المتجر للتطبيق ده.", "open":"افتح" }
   };
@@ -242,11 +269,24 @@ footer .btn.pri{background:#fff;border-color:#fff;color:var(--ink)}
 
     // marquee — the list twice so the loop is seamless
     var cards = APPS.map(function(a){
-      var ic = a.icon ? '<img src="'+a.icon+'" alt="" loading="lazy" data-fb="'+esc(txt(a.name).slice(0,2))+'">'
-                      : '<div class="ph">'+esc(txt(a.name).slice(0,2))+'</div>';
-      return '<button class="mcard" data-go="'+a.key+'" type="button">'+
-               '<div class="mtop">'+ic+'<div><b>'+esc(txt(a.name))+'</b><small>'+esc(a.year)+' &middot; '+a.flag+'</small></div></div>'+
-               '<p>'+esc(txt(a.one))+'</p><div class="mgo">'+(L==='ar'?'شوف ↓':'See it ↓')+'</div></button>';
+      var init = esc(txt(a.name).slice(0,2));
+      var ic = a.icon ? '<img src="'+a.icon+'" alt="" loading="lazy" data-fb="'+init+'">'
+                      : '<div class="ph">'+init+'</div>';
+      // جزء من أول صورة للتطبيق. مفيش صورة؟ الأيقونة كبيرة على خلفية متدرجة.
+      var shot = (a.shots && a.shots.length)
+        ? '<div class="mshot"><img src="'+a.shots[0]+'" alt="" loading="lazy"></div>'
+        : '<div class="mshot none"><div class="big">'+init+'</div></div>';
+      var tags = txt(a.tags).slice(0,2).map(function(x){ return '<span>'+esc(x)+'</span>'; }).join('');
+      return '<button class="mcard" data-go="'+a.key+'" type="button" aria-label="'+esc(txt(a.name))+'">'+
+               shot+
+               '<div class="mbody">'+
+                 '<div class="mtop">'+ic+'<div><b>'+esc(txt(a.name))+'</b>'+
+                   '<small>'+esc(a.year)+' &middot; '+a.flag+'</small></div></div>'+
+                 '<p>'+esc(txt(a.one))+'</p>'+
+                 '<div class="mtags">'+tags+'</div>'+
+                 '<div class="mgo">'+(L==='ar'?'شوف التفاصيل':'See the detail')+
+                   '<span class="arr">↓</span></div>'+
+               '</div></button>';
     });
     document.getElementById('track').innerHTML = cards.join('') + cards.join('');
 
@@ -264,7 +304,7 @@ footer .btn.pri{background:#fff;border-color:#fff;color:var(--ink)}
             return '<img src="'+s+'" alt="'+esc(txt(a.name))+'" loading="lazy">'; }).join('')+'</div>'
         : '<div class="noshot">'+T[L]['noshot']+'</div>';
       var links = (a.links||[]).map(function(k){
-        var lbl = k.label ? txt(k.label) : (k.t==='play' ? 'Google Play' : (k.t==='ios' ? 'App Store' : T[L]['open']));
+        var lbl = k.label ? txt(k.label) : (T[L][k.t] || T[L]['open']);
         var ico = k.t==='play' ? PLAY : (k.t==='ios' ? IOS : GLOBE);
         return '<a class="btn pri" href="'+k.u+'" target="_blank" rel="noopener">'+ico+lbl+'</a>';
       }).join('');
@@ -299,6 +339,47 @@ footer .btn.pri{background:#fff;border-color:#fff;color:var(--ink)}
 
     document.getElementById('built').textContent = BUILT;
     wireImages();
+    wireGalleries();
+  }
+
+  // معرض صور كل تطبيق بيتحرك لوحده — بس بيفضل سكرولر حقيقي, فتقدر تسحبه بإيدك.
+  // ماعملتهاش بأنيميشن CSS عشان الأنيميشن بيلغي السحب, والزائر اللي عايز يبص
+  // على صورة معينة لازم يقدر يمسكها.
+  function autoScroll(g){
+    var dir = (document.documentElement.dir === 'rtl') ? -1 : 1;
+    var paused = false, raf = 0, acc = 0;
+    function max(){ return g.scrollWidth - g.clientWidth; }
+    function hold(ms){ paused = true; clearTimeout(g._t); g._t = setTimeout(function(){ paused=false; }, ms); }
+    ['pointerenter','focusin'].forEach(function(e){ g.addEventListener(e, function(){ paused=true; clearTimeout(g._t); }); });
+    ['pointerleave','focusout'].forEach(function(e){ g.addEventListener(e, function(){ hold(600); }); });
+    g.addEventListener('wheel', function(){ hold(3000); }, {passive:true});
+    g.addEventListener('touchstart', function(){ hold(4000); }, {passive:true});
+    function step(){
+      raf = requestAnimationFrame(step);
+      if(paused || max() <= 4) return;
+      acc += 0.55;                       // بطيء بالقصد — ده معرض مش سلايدر
+      if(acc < 1) return;
+      var by = Math.floor(acc); acc -= by;
+      var at = Math.abs(g.scrollLeft);
+      if(at >= max() - 1){ g.scrollTo({left:0, behavior:'smooth'}); hold(1200); return; }
+      g.scrollLeft += dir * by;
+    }
+    // ما يشتغلش لو المستخدم طالب تقليل الحركة
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches) raf = requestAnimationFrame(step);
+    g._stop = function(){ cancelAnimationFrame(raf); };
+  }
+
+  function wireGalleries(){
+    document.querySelectorAll('.gal').forEach(function(g){
+      if(g._stop) g._stop();
+      // استنى الصور تحمّل الأول, وإلا scrollWidth بيبقى غلط
+      var imgs=[...g.querySelectorAll('img')], left=imgs.length;
+      if(!left) return;
+      imgs.forEach(function(im){
+        if(im.complete) done(); else { im.addEventListener('load',done,{once:true}); im.addEventListener('error',done,{once:true}); }
+      });
+      function done(){ if(--left<=0) autoScroll(g); }
+    });
   }
 
   // صورة من متجر ممكن تتغير في أي وقت. لو وقعت, المفروض الصفحة تفضل شكلها
