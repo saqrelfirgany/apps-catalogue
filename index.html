@@ -50,7 +50,18 @@ a{color:inherit;text-decoration:none}
 html[dir=rtl] .eyebrow{letter-spacing:0;font-family:var(--f-ar)}
 .hero h1{font-size:clamp(38px,6.2vw,68px);line-height:1.08;letter-spacing:-.035em;margin:0 0 22px;font-weight:800}
 html[dir=rtl] .hero h1{letter-spacing:0;line-height:1.25}
-.hero p.lead{font-size:clamp(16px,1.9vw,19.5px);color:var(--ink2);max-width:62ch;margin:0 0 34px}
+.hero p.lead{font-size:clamp(16px,1.9vw,19.5px);color:var(--ink2);max-width:62ch;margin:0 0 26px}
+
+/* ---------- profiles row (نفسه في هب الألعاب) ---------- */
+.prow{display:flex;flex-wrap:wrap;gap:9px;margin:0 0 32px}
+.prow a{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--line);
+        border-radius:999px;background:#fff;font-size:13px;font-weight:600;color:var(--ink2);transition:.18s}
+.prow a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);
+              box-shadow:0 8px 20px rgba(15,23,32,.07)}
+.prow a svg{width:15px;height:15px;fill:currentColor;flex:none}
+.prow a .hd{color:var(--mut);font-weight:500;font-family:var(--f-lat);direction:ltr;unicode-bidi:isolate}
+.prow a:hover .hd{color:var(--accent)}
+@media(max-width:700px){ .prow a .hd{display:none} }
 .hstats{display:flex;flex-wrap:wrap;gap:44px;padding-top:8px}
 .hstats b{display:block;font-size:34px;font-weight:800;letter-spacing:-.03em;font-family:var(--f-lat);
           direction:ltr;unicode-bidi:isolate;line-height:1.1}
@@ -166,6 +177,16 @@ html[dir=rtl] .hardbox b{letter-spacing:0;text-transform:none;font-family:var(--
 .privnote{font-size:13px;color:var(--mut);background:#fff;border:1px dashed #cdd6e2;
           border-radius:11px;padding:13px 17px}
 
+/* ---------- the games cross-link (نفسه في هب الألعاب) ---------- */
+.cross{padding:88px 0;border-top:1px solid var(--line);background:var(--bg2)}
+.crossbox{background:#fff;border:1px solid var(--line);border-radius:22px;padding:46px 44px;
+          box-shadow:0 18px 44px rgba(15,23,32,.07)}
+.crossbox .eyebrow{margin-bottom:14px}
+.crossbox h2{font-size:clamp(25px,3.4vw,38px);letter-spacing:-.03em;margin:0 0 12px;font-weight:800;line-height:1.15}
+html[dir=rtl] .crossbox h2{letter-spacing:0}
+.crossbox p{color:var(--ink2);font-size:16px;margin:0 0 26px;max-width:60ch}
+@media(max-width:640px){ .crossbox{padding:32px 24px} }
+
 /* ---------- footer ---------- */
 footer{padding:76px 0;border-top:1px solid var(--line);background:var(--ink);color:#fff}
 footer h2{font-size:clamp(24px,3.4vw,36px);letter-spacing:-.03em;margin:0 0 14px;font-weight:800}
@@ -194,12 +215,24 @@ footer .btn.pri{background:#fff;border-color:#fff;color:var(--ink)}
     <div class="wrap">
       <div class="eyebrow" data-t="site.role"></div>
       <h1 data-t="site.tagline"></h1>
+      <div class="prow" id="prow"></div>
       <p class="lead" data-t="site.intro"></p>
       <div class="hstats" id="hstats"></div>
     </div>
     <div class="strip"><div class="track" id="track"></div></div>
   </section>
   <div id="apps"></div>
+
+  <section class="cross">
+    <div class="wrap">
+      <div class="crossbox">
+        <div class="eyebrow" data-t="cross.eyebrow"></div>
+        <h2 data-t="cross.h"></h2>
+        <p data-t="cross.p"></p>
+        <div class="btns" id="crossbtns"></div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -221,17 +254,25 @@ footer .btn.pri{background:#fff;border-color:#fff;color:var(--ink)}
     en:{ "cta.h":"Want to see one of these built for you?",
          "cta.p":"The fastest way to judge the work is to open one. Every link above is live.",
          "cta.fine":"Screenshots come from the public store listings.",
-         "cta.upd":"Updated", "nav.work":"The work", "gallery":"Screenshots",
+         "cta.upd":"Updated", "nav.work":"The apps", "nav.games":"The games", "gallery":"Screenshots",
          "play":"Google Play", "ios":"App Store",
          "did":"What I built", "hard":"The hard part", "internal":"Internal system — it runs inside the client's company, so there is no public store page.",
-         "noshot":"No store gallery for this one.", "open":"Open" },
+         "noshot":"No store gallery for this one.", "open":"Open",
+         "cross.eyebrow":"The other half",
+         "cross.h":"The games",
+         "cross.p":"The apps above are the shipped work. The games are where I push Flutter past what it is supposed to do — real 3D drawn on the GPU, and real Box2D physics, both playable in your browser right now.",
+         "cross.btn":"Open the games hub" },
     ar:{ "cta.h":"عايز واحد زي دول يتبني ليك؟",
          "cta.p":"أسرع طريقة تحكم على الشغل إنك تفتح واحد منهم. كل اللينكات فوق شغالة.",
          "cta.fine":"الصور من صفحات التطبيقات على المتاجر.",
-         "cta.upd":"آخر تحديث", "nav.work":"الشغل", "gallery":"صور من التطبيق",
+         "cta.upd":"آخر تحديث", "nav.work":"التطبيقات", "nav.games":"الألعاب", "gallery":"صور من التطبيق",
          "play":"جوجل بلاي", "ios":"آب ستور",
          "did":"اللي عملته", "hard":"الجزء الصعب", "internal":"نظام داخلي — بيشتغل جوه شركة العميل, فمالوش صفحة على متجر عام.",
-         "noshot":"مفيش معرض صور على المتجر للتطبيق ده.", "open":"افتح" }
+         "noshot":"مفيش معرض صور على المتجر للتطبيق ده.", "open":"افتح",
+         "cross.eyebrow":"النص التاني",
+         "cross.h":"الألعاب",
+         "cross.p":"التطبيقات اللي فوق هي الشغل اللي نزل. الألعاب هي المكان اللي بدفع فيه فلاتر لأبعد من اللي المفروض تعمله — ثري-دي حقيقي بيترسم على كارت الشاشة, وفيزياء Box2D حقيقية, والاتنين تلعبهم من متصفحك دلوقتي.",
+         "cross.btn":"افتح هب الألعاب" }
   };
   // اللغة: من الرابط الأول (عشان يبعت لينك عربي لعميل خليجي), وبعدين اللي اختاره
   // قبل كده, وبعدين لغة المتصفح.
@@ -246,6 +287,19 @@ footer .btn.pri{background:#fff;border-color:#fff;color:var(--ink)}
   var PLAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.3 13 12 3.6 21.7A2 2 0 0 1 3 20.3V3.7a2 2 0 0 1 .6-1.4Zm11 10.9 2.6 2.6-9.4 5.4 6.8-8Zm0-2.4-6.8-8 9.4 5.4-2.6 2.6Zm4.2-1.5 2.7 1.6a1.9 1.9 0 0 1 0 3.2l-2.7 1.6-3-3 3-3.4Z"/></svg>';
   var IOS ='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.8c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.3.8-.7 0-1.7-.8-2.8-.8-1.5 0-2.8.8-3.6 2.1-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.2 1.1 0 1.5-.7 2.8-.7 1.3 0 1.6.7 2.8.7 1.2 0 1.9-1.1 2.6-2.1.8-1.2 1.2-2.4 1.2-2.4s-2.2-.9-2.2-3.4ZM14.3 6c.6-.7 1-1.7.9-2.7-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.7-.9 2.6 1 .1 2-.5 2.6-1.2Z"/></svg>';
   var GLOBE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/></svg>';
+
+  // أيقونات البروفايلات — نفس المجموعة بالحرف في هب الألعاب.
+  var ICON = {
+    github:'<svg viewBox="0 0 24 24"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0C17 4.7 18 5 18 5c.6 1.6.2 2.9.1 3.2.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.3v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>',
+    linkedin:'<svg viewBox="0 0 24 24"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM0 8.5h5V24H0zM8 8.5h4.8v2.1h.1c.7-1.3 2.3-2.6 4.7-2.6 5 0 6 3.3 6 7.6V24h-5v-6.8c0-1.6 0-3.7-2.3-3.7s-2.6 1.8-2.6 3.6V24H8z"/></svg>',
+    x:'<svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.8l-5.3-6.9L4.8 22H1.7l8.2-9.4L1 2h7l4.8 6.4L18.9 2zm-2.4 18h1.9L7.6 4H5.6l10.9 16z"/></svg>',
+    devto:'<svg viewBox="0 0 24 24"><path d="M7.4 7.9c-.3-.2-.6-.3-.9-.3H5.4v8.8h1.1c.3 0 .6-.1.9-.3.3-.2.4-.5.4-.9V9.1c0-.4-.1-.7-.4-.9zm3.9-.3c-.4 0-.8.1-1.1.4-.3.3-.5.7-.5 1.1v5.8c0 .4.2.8.5 1.1.3.3.7.4 1.1.4h4.6v-1.6h-4v-1.8h2.5v-1.6h-2.5V9.2h4V7.6zM3 2h18a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/></svg>',
+    facebook:'<svg viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.6 4.5-4.6 1.3 0 2.6.2 2.6.2v2.9h-1.5c-1.5 0-1.9.9-1.9 1.8V12h3.3l-.5 3.5h-2.8v8.4A12 12 0 0 0 24 12z"/></svg>',
+    instagram:'<svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 3.6A6.2 6.2 0 1 0 18.2 12 6.2 6.2 0 0 0 12 5.8zm0 10.2A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm6.4-10.5a1.44 1.44 0 1 1-1.4-1.4 1.44 1.44 0 0 1 1.4 1.4z"/></svg>',
+    threads:'<svg viewBox="0 0 24 24"><path d="M16.7 11.2c-.1 0-.2-.1-.3-.1-.2-3-1.8-4.7-4.5-4.7-1.6 0-3 .7-3.8 2l1.5 1c.6-.9 1.5-1.1 2.3-1.1 1.4 0 2.4.9 2.6 2.4-.7-.2-1.4-.3-2.2-.2-2.2.1-3.7 1.4-3.6 3.3.1 1.9 1.8 2.9 3.5 2.8 2.2-.1 3.4-1.6 3.6-3.5.7.4 1.2 1 1.4 1.8.4 1.3-.4 3.3-2.9 3.9-2.2.5-4.6-.1-5.9-2-.9-1.3-1.2-3-1.2-4.6 0-1.6.3-3.3 1.2-4.6C9.4 5.9 11 5.2 12.9 5.2c2 0 3.5.7 4.5 2.1.5.6.8 1.4 1 2.2l1.8-.5c-.3-1.1-.7-2.1-1.4-3-1.3-1.8-3.4-2.8-6-2.8-2.5 0-4.6 1-5.9 2.8C5.5 8 5 10 5 12s.5 4 1.7 5.6c1.3 1.9 3.4 2.9 6 2.8 2.9-.1 5.2-1.6 5.9-4.1.5-1.7-.1-3.6-1.9-5.1zm-4.4 4.4c-1 .1-1.9-.4-1.9-1.2 0-.6.5-1.2 1.9-1.3.6 0 1.2 0 1.7.1-.1 1.5-.8 2.3-1.7 2.4z"/></svg>',
+    email:'<svg viewBox="0 0 24 24"><path d="M2 4h20a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm10 7L3 6.2V18h18V6.2L12 11z"/></svg>'
+  };
+  var GAMEPAD='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 6H7a5 5 0 0 0-5 5v3a4 4 0 0 0 7.2 2.4l.6-.9h4.4l.6.9A4 4 0 0 0 22 14v-3a5 5 0 0 0-5-5ZM8.8 12.4H7.6v1.2a.9.9 0 1 1-1.8 0v-1.2H4.6a.9.9 0 1 1 0-1.8h1.2V9.4a.9.9 0 1 1 1.8 0v1.2h1.2a.9.9 0 1 1 0 1.8Zm6.5.6a1.1 1.1 0 1 1 0-2.2 1.1 1.1 0 0 1 0 2.2Zm2.6 2a1.1 1.1 0 1 1 0-2.2 1.1 1.1 0 0 1 0 2.2Zm0-4a1.1 1.1 0 1 1 0-2.2 1.1 1.1 0 0 1 0 2.2Z"/></svg>';
 
   var BUILT = '2026-08-04';
   function txt(o){ return (o && typeof o==='object') ? (o[L]||o.en) : o; }
@@ -263,6 +317,11 @@ footer .btn.pri{background:#fff;border-color:#fff;color:var(--ink)}
       if(k.indexOf('site.')===0) n.textContent = txt(SITE[k.slice(5)]);
       else n.textContent = T[L][k] || k;
     });
+
+    document.getElementById('prow').innerHTML = PROFILES.map(function(p){
+      return '<a href="'+p.u+'" target="_blank" rel="noopener">'+ICON[p.k]+
+             '<span>'+p.n+'</span><span class="hd">'+esc(p.h)+'</span></a>';
+    }).join('');
 
     document.getElementById('hstats').innerHTML = SITE.stats.map(function(s){
       return '<div><b>'+esc(txt(s.v))+'</b><span>'+esc(txt(s.l))+'</span></div>'; }).join('');
@@ -292,7 +351,7 @@ footer .btn.pri{background:#fff;border-color:#fff;color:var(--ink)}
 
     document.getElementById('nav').innerHTML =
       '<a href="#apps">'+T[L]['nav.work']+'</a>'+
-      '<a href="'+SITE.links.games+'" target="_blank" rel="noopener">'+(L==='ar'?'الألعاب':'Games')+'</a>'+
+      '<a href="'+SITE.links.games+'">'+T[L]['nav.games']+'</a>'+
       '<a href="'+SITE.links.github+'" target="_blank" rel="noopener">GitHub</a>';
 
     document.getElementById('apps').innerHTML = APPS.map(function(a,i){
@@ -331,11 +390,14 @@ footer .btn.pri{background:#fff;border-color:#fff;color:var(--ink)}
         '</div></div></div></section>';
     }).join('');
 
+    document.getElementById('crossbtns').innerHTML =
+      '<a class="btn pri" href="'+SITE.links.games+'">'+GAMEPAD+T[L]['cross.btn']+'</a>';
+
     document.getElementById('cta').innerHTML =
       '<a class="btn pri" href="'+SITE.links.mail+'">'+(L==='ar'?'كلمني':'Email me')+'</a>'+
       '<a class="btn" href="'+SITE.links.linkedin+'" target="_blank" rel="noopener">LinkedIn</a>'+
       '<a class="btn" href="'+SITE.links.github+'" target="_blank" rel="noopener">GitHub</a>'+
-      '<a class="btn" href="'+SITE.links.games+'" target="_blank" rel="noopener">'+(L==='ar'?'الألعاب':'Games hub')+'</a>';
+      '<a class="btn" href="'+SITE.links.games+'">'+(L==='ar'?'الألعاب':'Games hub')+'</a>';
 
     document.getElementById('built').textContent = BUILT;
     wireImages();
