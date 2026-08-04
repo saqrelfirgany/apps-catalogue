@@ -238,7 +238,7 @@ footer .btn.pri{background:#fff;border-color:#fff;color:var(--ink)}
     });
 
     document.getElementById('hstats').innerHTML = SITE.stats.map(function(s){
-      return '<div><b>'+esc(s.v)+'</b><span>'+esc(txt(s.l))+'</span></div>'; }).join('');
+      return '<div><b>'+esc(txt(s.v))+'</b><span>'+esc(txt(s.l))+'</span></div>'; }).join('');
 
     // marquee — the list twice so the loop is seamless
     var cards = APPS.map(function(a){
@@ -281,7 +281,7 @@ footer .btn.pri{background:#fff;border-color:#fff;color:var(--ink)}
           '<h3 class="mini">'+T[L]['gallery']+'</h3>'+gal+
         '</div><div>'+
           '<div class="stat3">'+(a.stats||[]).map(function(s){
-              return '<div><b>'+esc(s.v)+'</b><span>'+esc(txt(s.l))+'</span></div>'; }).join('')+'</div>'+
+              return '<div><b>'+esc(txt(s.v))+'</b><span>'+esc(txt(s.l))+'</span></div>'; }).join('')+'</div>'+
           '<p class="body">'+esc(txt(a.body))+'</p>'+
           '<h3 class="mini">'+T[L]['did']+'</h3>'+
           '<ul class="did">'+txt(a.built).map(function(b){ return '<li>'+esc(b)+'</li>'; }).join('')+'</ul>'+
