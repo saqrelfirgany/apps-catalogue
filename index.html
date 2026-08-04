@@ -338,6 +338,13 @@ footer .btn.pri{background:#fff;border-color:#fff;color:var(--ink)}
   }, {passive:true});
 
   render();
+
+  // لينك زي .../#adam لازم ينزل على التطبيق ده. المتصفح بيحاول قبل ما المحتوى
+  // يترسم, فبنعيدها بعد الرسم — ده اللي بيخلي اللينك اللي تبعته لعميل يشتغل.
+  if(location.hash.length>1){
+    var el=document.getElementById(location.hash.slice(1));
+    if(el) setTimeout(function(){ el.scrollIntoView({block:'start'}); }, 60);
+  }
 })();
 </script>
 </body>
